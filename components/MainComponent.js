@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
+import Home from './HomeComponent';
 import Directory from './DirectoryComponent';
 import CampsiteInfo from './CampsiteInfoComponent';
 import { View, Platform } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
+import { createDrawerNavigator } from 'react-navigation-drawer';
 import { createAppContainer } from 'react-navigation';
-import ExpoStatusBar from 'expo-status-bar/build/ExpoStatusBar';
 
-//SETTING UP STACK NAVIGATOR
+//SETTING UP STACK NAVIGATOR 
 const DirectoryNavigator = createStackNavigator(
     {
         Directory: { screen: Directory },
@@ -26,8 +27,37 @@ const DirectoryNavigator = createStackNavigator(
     }
 );
 
+const HomeNavigator = createStackNavigator(
+    {
+        Home: { screen: Home },
+        
+    },
+    {
+        defaultNavigationOptions: {
+            headerStyle: {
+                backgroundColor: '#5637DD'
+            },
+            headerTinColor: '#fff',
+            headerTitleStyle: {
+                color: '#fff'
+            }
+        }
+    }
+);
+
+//DRAWER NAVIGATOR
+const MainNavigator = createDrawerNavigator(
+    {
+        Home: { screen: HomeNavigator },
+        Directory: { screen:DirectoryNavigator }
+    },
+    {
+        drawerBackgroundColor: '#CEC8FF'
+    }
+)
+
 //PASS STACK NAVIGATOR TO THE CREATEAPPCONTAINER FUNCTION
-const AppNavigator = createAppContainer(DirectoryNavigator);
+const AppNavigator = createAppContainer(MainNavigator);
 
 class Main extends Component {
 
