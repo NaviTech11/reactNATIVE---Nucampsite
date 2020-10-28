@@ -16,7 +16,7 @@ const config = {
     debug: true
 }
 
-export const ConfigureStore = () => {
+export const ConfigureStore = () => { 
     const store = createStore(
         persistCombineReducers(config, {
             campsites,
